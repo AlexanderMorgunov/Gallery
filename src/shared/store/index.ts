@@ -28,6 +28,10 @@ export const Store = t
       self.image = "";
     };
 
+    const openItem = () => {
+      self.isOpen = true;
+    };
+
     const loadImage = flow(function* (imageId: string) {
       const imageBlob = yield getImage(imageId);
       self.image = URL.createObjectURL(imageBlob);
@@ -62,6 +66,7 @@ export const Store = t
       loadImage,
       handleNextItem,
       handlePrevItem,
+      openItem,
     };
   });
 

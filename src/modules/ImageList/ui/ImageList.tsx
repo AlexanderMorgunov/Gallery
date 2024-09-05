@@ -1,9 +1,10 @@
-import { useEffect } from "react";
 import { ImageItem } from "../../ImageItem/ui/ImageItem";
 import styled from "styled-components";
 import { ImageModal } from "./ImageModal";
-import { useStore } from "../../../shared/store";
+import { GalleryItemModuleType, useStore } from "../../../shared/store";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StyledList = styled.ul`
   display: flex;
@@ -17,10 +18,58 @@ const StyledList = styled.ul`
 
 const ImageList = observer(() => {
   const store = useStore();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const extractImgId = () => {
+    const pathParts = location.pathname.split("/"); // Разделяем путь по "/"
+    return pathParts[1] || null; // Возвращаем imgId, если он есть
+  };
+
+  const imgId = extractImgId();
 
   useEffect(() => {
-    store.loadGallery();
-  }, []);
+    const loadGalleryAndSetActiveItem = async () => {
+      await store.loadGallery();
+      if (imgId && store.gallery.length > 0) {
+        const activeItem = store.gallery.find((item) => item.image === imgId);
+        if (activeItem) {
+          store.setActiveItem(activeItem);
+          await store.loadImage(activeItem.image);
+          store.openItem();
+        }
+      }
+    };
+
+    loadGalleryAndSetActiveItem().catch((error) => {
+      console.error("Ошибка при загрузке галереи:", error);
+    });
+  }, [store, imgId]);
+
+  const handleImageClick = (item: GalleryItemModuleType) => {
+    store.setActiveItem(item);
+    store.loadImage(item.image);
+    navigate(`/${item.image}`);
+  };
+
+  const handleCloseModal = () => {
+    store.closeItem();
+    navigate(`/`);
+  };
+
+  const handleNextItem = () => {
+    store.handleNextItem();
+    if (store.activeItem) {
+      navigate(`/${store.activeItem.image}`);
+    }
+  };
+
+  const handlePrevItem = () => {
+    store.handlePrevItem();
+    if (store.activeItem) {
+      navigate(`/${store.activeItem.image}`);
+    }
+  };
 
   return (
     <>
@@ -30,18 +79,18 @@ const ImageList = observer(() => {
             <ImageItem
               key={item.id}
               item={item}
-              onClickHandler={store.setActiveItem}
+              onClickHandler={handleImageClick}
             />
           ))
         ) : (
           <p>No data</p>
         )}
       </StyledList>
-      {store.isOpen && (
+      {store.isOpen && store.image.length > 0 && (
         <ImageModal
-          setIsOpen={store.closeItem}
-          handleNextItem={store.handleNextItem}
-          handlePrevItem={store.handlePrevItem}
+          setIsOpen={handleCloseModal}
+          handleNextItem={handleNextItem}
+          handlePrevItem={handlePrevItem}
         >
           <img src={store.image} alt={store.activeItem?.title} />
         </ImageModal>
