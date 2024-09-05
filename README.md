@@ -57,3 +57,10 @@
 - **CORS и безопасность:** Приложение настроено на взаимодействие с Directus, включая конфигурации для работы с CORS, обеспечивая безопасный обмен данными между клиентом и сервером.
 
 Этот функционал делает приложение гибким и удобным в использовании как для конечных пользователей, так и для администраторов, позволяя эффективно управлять контентом галереи.
+
+#### Скриншоты:
+
+![Галерея](https://github.com/AlexanderMorgunov/Gallery/blob/main/screenshots/1.png)
+![Модалка](https://github.com/AlexanderMorgunov/Gallery/blob/main/screenshots/2.png)
+![Модалка](https://github.com/AlexanderMorgunov/Gallery/blob/main/screenshots/3.png)
+![Мобильная адаптация](https://github.com/AlexanderMorgunov/Gallery/blob/main/screenshots/4.png)
