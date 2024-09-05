@@ -5,5 +5,4 @@ export const GalleryItemModel = t.model("GalleryItemModel", {
   title: t.string,
   image: t.string,
   thumbnail: t.maybeNull(t.string),
-  //   thumbnail: t.optional(t.string, ""),
 });

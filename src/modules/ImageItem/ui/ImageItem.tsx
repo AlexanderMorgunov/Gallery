@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { getImage } from "../api/getImage";
-// import { GalleryItem } from "../../../shared/types/GalleryItem";
 import styled from "styled-components";
 import { GalleryItemModuleType } from "../../../shared/store";
 
