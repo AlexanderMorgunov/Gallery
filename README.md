@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# Галерея:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Стек:
 
-Currently, two official plugins are available:
+- React
+- TypeScript
+- Styled components
+- Axios
+- В качестве бекэнда используется Directus
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Запуск
 
-## Expanding the ESLint configuration
+Проект создан на основе [Vite](https://vitejs.dev/). Для запуска приложения нужно:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- "подтянуть" зависимости командой `npm install` или `yarn install`
+- запустить Docker
+- развернуть Docker контейнер с Directus `docker compose up`
+- выполнить команду `npm run dev` или `yarn run dev` для запуска сервера
+- приложение доступно по http://localhost:5173/
+- бекэнд доступен по адресу http://localhost:8055/
 
-- Configure the top-level `parserOptions` property like this:
+### Функционал:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Приложение представляет собой галерею и позволяет просматривать изображения.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+#### Основные возможности:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **Просмотр изображений:** Пользователи могут просматривать список изображений, загруженных администраторами через Directus.
+- **Открытие изображения в модальном окне:** При клике на изображение открывается модальное окно с увеличенной версией изображения.
+- **Навигация по изображениям:** В модальном окне предусмотрена навигация по изображениям с помощью кнопок «Следующее» и «Предыдущее».
+- **Адаптивный интерфейс:** Интерфейс приложения адаптирован для различных устройств, обеспечивая удобный просмотр изображений на экранах разного размера.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+#### Административные функции (через Directus):
+
+- **Загрузка изображений:** Администраторы могут загружать изображения в галерею через Directus.
+- **Добавление описания к изображениям:** В Directus можно добавлять заголовки и описания для изображений, которые отображаются в галерее.
+- **Управление контентом:** Весь контент можно управлять через Directus, что позволяет легко добавлять, удалять и редактировать элементы галереи без изменения кода приложения.
+
+### Архитектура:
+
+- **MobX State Tree:** Для управления состоянием приложения используется MobX State Tree, который позволяет организовать данные и действия, обеспечивая предсказуемое поведение приложения.
+- **API взаимодействие:** Для получения данных используется библиотека Axios. Загрузка изображений и данных о них осуществляется через REST API, предоставляемый Directus.
+
+### Структура проекта:
+
+- **Компоненты:** Основные компоненты приложения включают:
+
+  - `ImageList`: отображает список изображений.
+  - `ImageItem`: представляет отдельное изображение с миниатюрой.
+  - `ImageModal`: модальное окно для просмотра увеличенной версии изображения.
+
+- **Модели и состояние:** Состояние галереи управляется через MobX State Tree с моделями, описывающими элементы галереи и их взаимодействие.
+
+### Дополнительно:
+
+- **Обработка ошибок:** Реализована базовая обработка ошибок при загрузке изображений и данных.
+- **CORS и безопасность:** Приложение настроено на взаимодействие с Directus, включая конфигурации для работы с CORS, обеспечивая безопасный обмен данными между клиентом и сервером.
+
+Этот функционал делает приложение гибким и удобным в использовании как для конечных пользователей, так и для администраторов, позволяя эффективно управлять контентом галереи.
