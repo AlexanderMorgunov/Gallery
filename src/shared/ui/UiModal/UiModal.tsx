@@ -15,9 +15,10 @@ const StyledWinModal = styled.div`
 @media (max-width: 900px) {
   width: max-content;
   max-width: 90vw;
-max-height: 98vh;
+height: 90vh;
 }
-  max-width: 60vw;
+  height: 80vh;
+  max-width: 70vw;
   background-color: #fff;
   border-radius: 20px;
   position: absolute;

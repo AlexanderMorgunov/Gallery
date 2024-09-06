@@ -9,6 +9,9 @@ const StyledModalWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
 
   .image-wrapper {
     display: flex;
@@ -18,8 +21,8 @@ const StyledModalWrapper = styled.div`
     margin-bottom: 1rem;
 
     img {
-      max-width: 100%;
-      max-height: 80vh;
+      max-width: 80vw;
+      max-height: 70vh;
       border-radius: 20px;
     }
   }

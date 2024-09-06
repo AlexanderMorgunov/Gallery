@@ -1,4 +1,4 @@
-import { ImageItem } from "../../ImageItem/ui/ImageItem";
+import { ImageItem } from "../../ImageItem/";
 import styled from "styled-components";
 import { ImageModal } from "./ImageModal";
 import { GalleryItemModuleType, useStore } from "../../../shared/store";
