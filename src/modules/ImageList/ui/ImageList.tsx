@@ -91,6 +91,10 @@ const ImageList = observer(() => {
           setIsOpen={handleCloseModal}
           handleNextItem={handleNextItem}
           handlePrevItem={handlePrevItem}
+          currentIndex={store.gallery.findIndex(
+            (item) => item.id === store.activeItem?.id
+          )}
+          totalCount={store.gallery.length}
         >
           <img src={store.image} alt={store.activeItem?.title} />
         </ImageModal>

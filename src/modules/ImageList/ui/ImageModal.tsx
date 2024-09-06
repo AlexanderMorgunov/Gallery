@@ -51,6 +51,8 @@ interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleNextItem: () => void;
   handlePrevItem: () => void;
+  totalCount: number;
+  currentIndex: number;
 }
 
 const ImageModal: FC<Props> = ({
@@ -58,6 +60,8 @@ const ImageModal: FC<Props> = ({
   setIsOpen,
   handleNextItem,
   handlePrevItem,
+  totalCount,
+  currentIndex,
 }) => {
   return (
     <UiModal setIsOpen={setIsOpen}>
@@ -67,6 +71,8 @@ const ImageModal: FC<Props> = ({
           <button onClick={handlePrevItem}>
             <FaLongArrowAltLeft />
           </button>
+          {currentIndex + 1 < 10 ? `0${currentIndex + 1}` : currentIndex + 1}/
+          {totalCount < 10 ? `0${totalCount}` : totalCount}
           <button onClick={handleNextItem}>
             <FaLongArrowAltRight />
           </button>
