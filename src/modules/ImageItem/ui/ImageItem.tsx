@@ -31,6 +31,7 @@ const StyledItem = styled.li`
     max-height: 100%;
     object-fit: contain;
     margin-bottom: 0.5rem;
+    border-radius: 10px;
   }
 `;
 

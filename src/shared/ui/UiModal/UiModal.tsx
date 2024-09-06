@@ -38,7 +38,7 @@ height: 90vh;
     cursor: pointer;
     border: none;
     background-color: transparent;
-    font-size: 20px;
+    font-size: 15px;
     color: #000;
         &:hover {
         color: #888;
