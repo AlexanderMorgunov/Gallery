@@ -1,18 +1,11 @@
 import { useEffect } from "react";
 import { GalleryItemModuleType, useStore } from "../../../shared/store";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const useImageList = () => {
   const store = useStore();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const extractImgId = () => {
-    const pathParts = location.pathname.split("/");
-    return pathParts[1] || null;
-  };
-
-  const imgId = extractImgId();
+  const { imgId } = useParams<{ imgId: string }>();
 
   useEffect(() => {
     const loadGalleryAndSetActiveItem = async () => {

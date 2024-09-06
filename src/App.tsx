@@ -1,7 +1,7 @@
-import { ImageList } from "./modules/ImageList";
+import { AppRouter } from "./AppRouter";
 
 function App() {
-  return <ImageList />;
+  return <AppRouter />;
 }
 
 export default App;
